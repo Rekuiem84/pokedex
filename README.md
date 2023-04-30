@@ -1,5 +1,5 @@
 # Pokedex
-The complete pokedex from the 1st to the 1010th pokemon, in the style of Galar's pokedex, using PokeAPI, sorted by generation.
+The complete pokedex from the 1st to the 1010th pokemon, in the style of Galar's pokedex, using PokeAPI, ordered by generation.
 
 You can access a button to see Alternative Form by removing the `visibility: hidden` of `#gen-10` in the devtools, however, most of them are blurry or non-existant, especially their shiny sprite.
 
