@@ -75,8 +75,7 @@ body {
 .gen-select input {
 	position: relative;
 	width: 35px;
-	height: 35px;
-	/* aspect-ratio: 1; */
+	aspect-ratio: 1;
 	cursor: pointer;
 	transition: margin-inline 0.2s ease-in-out, scale 0.2s ease-in-out;
 	transform-origin: center left;
