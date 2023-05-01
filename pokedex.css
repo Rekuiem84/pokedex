@@ -146,7 +146,7 @@ body {
 }
 /* Gen 5 */
 #gen-5::before {
-	--color-version-1: #e7f5f2;
+	--color-version-1: #f0f6f4;
 	--color-version-2: #272524;
 	background-image: var(--gradient-2-versions);
 }
