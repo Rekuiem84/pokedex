@@ -1,4 +1,4 @@
-# Pokedex test
+# Pokedex
 
 The complete pokedex from the 1st to the 1010th pokemon, in the style of Galar's pokedex, using PokeAPI, ordered by generation.
 
