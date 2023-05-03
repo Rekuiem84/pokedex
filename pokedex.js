@@ -5,6 +5,7 @@ const spriteGrandElement = document.querySelector(".pokemon-3Dmodel > img");
 const pokemonList = document.querySelector(".pokemon-list");
 const shinyButton = document.querySelector(".shiny-button");
 
+let isShiny = false;
 window.addEventListener("load", getPokeData(1, 151));
 
 function getPokeData(firstPoke, lastPoke) {
@@ -26,19 +27,18 @@ function getPokeData(firstPoke, lastPoke) {
 		}
 		// after all the promises are resolved, we can generate the cards
 		Promise.all(promises).then(() => {
-			// console.log(pokemonData);
 			pokemonList.innerHTML = "";
 			// if we have fetched all the Pokemon data, generate the cards in the correct order
 			pokemonData.forEach((data) => {
-				generateCard(data, lastPoke);
+				generateCard(data, lastPoke, isShiny);
 			});
 			betterPokemonCards();
-			toggleShiny();
+			selectPokemon();
 		});
 	}, 200);
 }
 
-function generateCard(data, lastPoke) {
+function generateCard(data, lastPoke, isShiny) {
 	const dex_number = data.id;
 	const name = data.name;
 	const spriteGrand = data.sprites.other["official-artwork"].front_default;
@@ -48,7 +48,9 @@ function generateCard(data, lastPoke) {
 
 	pokemonList.innerHTML += ` <li class="pokemon${
 		dex_number == lastPoke ? " pokemon-active" : ""
-	}" data-sprite-grand="${spriteGrand}" data-shiny="${spriteGrandShiny}" 
+	}" 
+	data-sprite-grand="${spriteGrand}" 
+	data-shiny="${spriteGrandShiny}" 
 	data-id="${dex_number}">
   <div>
   <div class="pokemon__sprite">
@@ -62,12 +64,16 @@ function generateCard(data, lastPoke) {
   </div>
   </li>
   `;
-	spriteGrandElement.src = spriteGrand;
+	if (isShiny) {
+		spriteGrandElement.src = spriteGrandShiny;
+	} else {
+		spriteGrandElement.src = spriteGrand;
+	}
+	spriteGrandElement.setAttribute("data-id", dex_number);
 }
 
 function betterPokemonCards() {
 	let pokemons = document.querySelectorAll(".pokemon");
-
 	//adds one or two 0 to the dex number if it is less than 10 or 100
 	pokemons.forEach((pokemon) => {
 		let dex_entry = pokemon.firstElementChild.lastElementChild.lastElementChild;
@@ -76,9 +82,18 @@ function betterPokemonCards() {
 		} else if (dex_entry.innerText.length == 2) {
 			dex_entry.innerText = "0" + dex_entry.innerText;
 		}
-		//adds an event listener to each pokemon so that when you click on it, it adds the class pokemon-active
+	});
+}
+function selectPokemon() {
+	let pokemons = document.querySelectorAll(".pokemon");
+	pokemons.forEach((pokemon) => {
+		//adds an event listener to each pokemon so that when you click on it, it adds the class pokemon-active and changes the sprite
 		pokemon.addEventListener("click", () => {
-			spriteGrandElement.src = pokemon.getAttribute("data-sprite-grand");
+			spriteGrandElement.setAttribute(
+				"data-id",
+				pokemon.getAttribute("data-id")
+			);
+			determinePokemonSprite(pokemon, isShiny);
 			pokemons.forEach((pokemon) => {
 				pokemon.classList.remove("pokemon-active");
 			});
@@ -86,33 +101,36 @@ function betterPokemonCards() {
 		});
 	});
 }
+function determinePokemonSprite(pokemon, isShiny) {
+	if (isShiny) {
+		spriteGrandElement.src = pokemon.getAttribute("data-shiny");
+	} else {
+		spriteGrandElement.src = pokemon.getAttribute("data-sprite-grand");
+	}
+	console.log(isShiny);
+}
+
+shinyButton.addEventListener("click", () => {
+	toggleShiny();
+});
 
 function toggleShiny() {
-	//the shiny button toggles between shiny and normal sprites
-	let shinySpriteLink =
+	let pokemonSpriteLink =
 		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
-	let pokemons = document.querySelectorAll(".pokemon");
-	let isShiny = false;
-	shinyButton.addEventListener("click", () => {
-		if (!isShiny) {
-			pokemons.forEach((pokemon) => {
-				if (pokemon.classList.contains("pokemon-active")) {
-					spriteGrandElement.src =
-						shinySpriteLink +
-						"shiny/" +
-						pokemon.getAttribute("data-id") +
-						".png";
-				}
-			});
-			isShiny = true;
-		} else {
-			pokemons.forEach((pokemon) => {
-				if (pokemon.classList.contains("pokemon-active")) {
-					spriteGrandElement.src =
-						shinySpriteLink + pokemon.getAttribute("data-id") + ".png";
-				}
-			});
-			isShiny = false;
-		}
-	});
+	isShiny = !isShiny;
+	let shinyButtonImage = document.querySelector(".shiny-button > img");
+	shinyButtonImage.src =
+		isShiny == true
+			? "images/shiny-stars-active.png"
+			: "images/shiny-stars.png";
+	if (isShiny) {
+		spriteGrandElement.src =
+			pokemonSpriteLink +
+			"shiny/" +
+			spriteGrandElement.getAttribute("data-id") +
+			".png";
+	} else {
+		spriteGrandElement.src =
+			pokemonSpriteLink + spriteGrandElement.getAttribute("data-id") + ".png";
+	}
 }
