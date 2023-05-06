@@ -312,19 +312,6 @@ div:has(.pokemon-3Dmodel) {
 		left: initial;
 		flex-direction: column;
 	}
-	@media screen and (max-width: 600px) {
-		.gen-select {
-			flex-wrap: wrap-reverse;
-			height: 255px;
-		}
-		.gen-select {
-			opacity: 0.5;
-			transition: all 0.3s;
-		}
-		.gen-select:hover {
-			opacity: 1;
-		}
-	}
 	.gen-select input {
 		transform-origin: top center;
 		transition: margin-bottom 0.2s ease-in-out, scale 0.2s ease-in-out;
@@ -349,13 +336,37 @@ div:has(.pokemon-3Dmodel) {
 		margin-inline: auto;
 		padding-right: 0;
 	}
-	@media screen and (max-width: 400px) {
-		.pokemon-list {
-			width: 100%;
-			min-width: initial;
-		}
-		.pokeball {
-			display: none;
-		}
+}
+@media screen and (max-width: 600px) {
+	.gen-select {
+		flex-wrap: wrap-reverse;
+		height: 255px;
+	}
+	.gen-select {
+		opacity: 0.5;
+		transition: all 0.3s;
+	}
+	.gen-select:hover {
+		opacity: 1;
+	}
+}
+@media screen and (max-width: 490px) {
+	div:has(.pokemon-3Dmodel) {
+		max-width: 300px;
+	}
+	.pokemon-3Dmodel {
+		margin-top: 70px;
+	}
+	.pokedex {
+		justify-content: space-between;
+	}
+}
+@media screen and (max-width: 400px) {
+	.pokemon-list {
+		width: 100%;
+		min-width: initial;
+	}
+	.pokeball {
+		display: none;
 	}
 }
