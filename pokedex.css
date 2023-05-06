@@ -77,7 +77,9 @@ body {
 
 .gen-select input {
 	position: relative;
-	width: 35px;
+	--width: 35px;
+	width: var(--width);
+	height: var(--width);
 	aspect-ratio: 1;
 	cursor: pointer;
 	transition: margin-right 0.2s ease-in-out, scale 0.2s ease-in-out;
@@ -263,15 +265,6 @@ div:has(.pokemon-3Dmodel) {
 .pokemon__name {
 	padding: 0 0.5rem;
 }
-.pokeball {
-	animation-play-state: paused;
-	aspect-ratio: 1;
-}
-.pokemon-active .pokeball {
-	animation: rotate 1600ms infinite linear;
-	animation-play-state: running;
-}
-
 @keyframes rotate {
 	to {
 		rotate: 360deg;
@@ -294,11 +287,19 @@ div:has(.pokemon-3Dmodel) {
 	margin-left: 0.5rem;
 }
 .pokeball {
-	width: 25px;
-	height: 25px;
+	--width: 25px;
+	width: var(--width);
+	height: var(--width);
+	aspect-ratio: 1;
 	display: flex;
+	animation-play-state: paused;
 }
-@media screen and (width < 992px) {
+.pokemon-active .pokeball {
+	animation: rotate 1600ms infinite linear;
+	animation-play-state: running;
+}
+
+@media screen and (max-width: 992px) {
 	.pokedex {
 		flex-direction: column;
 		height: calc(100vh - 46px);
@@ -311,7 +312,7 @@ div:has(.pokemon-3Dmodel) {
 		left: initial;
 		flex-direction: column;
 	}
-	@media screen and (width < 600px) {
+	@media screen and (max-width: 600px) {
 		.gen-select {
 			flex-wrap: wrap-reverse;
 			height: 255px;
@@ -348,7 +349,7 @@ div:has(.pokemon-3Dmodel) {
 		margin-inline: auto;
 		padding-right: 0;
 	}
-	@media screen and (width < 400px) {
+	@media screen and (max-width: 400px) {
 		.pokemon-list {
 			width: 100%;
 			min-width: initial;
