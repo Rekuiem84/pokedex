@@ -181,12 +181,10 @@ body {
 	background-image: var(--gradient-2-versions);
 }
 /* Formes Alt */
-#gen-10 {
+#alt-forms {
 	visibility: hidden;
 }
-#gen-10::before {
-	--color-version-1: #eb3b4f;
-	--color-version-2: #781984;
+#alt-forms::before {
 	background-image: radial-gradient(white 21%, black 21% 25%, transparent 25%),
 		linear-gradient(
 			red 41%,
