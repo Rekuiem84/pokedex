@@ -16,6 +16,7 @@ html::-webkit-scrollbar {
 }
 img {
 	width: 100%;
+	vertical-align: middle;
 }
 body {
 	max-width: 1920px;
@@ -274,7 +275,6 @@ div:has(.pokemon-3Dmodel) {
 }
 .pokemon__sprite {
 	width: 60px;
-	scale: 1.2;
 	transform-origin: bottom;
 	margin-inline: 10px;
 }

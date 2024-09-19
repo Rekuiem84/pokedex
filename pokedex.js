@@ -43,8 +43,7 @@ function generateCard(data, lastPoke, isShiny) {
 	const name = data.name;
 	const spriteGrand = data.sprites.other["official-artwork"].front_default;
 	const spriteGrandShiny = data.sprites.other["official-artwork"].front_shiny;
-	const spriteIcon =
-		data.sprites.versions["generation-viii"].icons.front_default;
+	const spriteIcon = data.sprites.front_default;
 
 	pokemonList.innerHTML += ` <li class="pokemon${
 		dex_number == lastPoke ? " pokemon-active" : ""
