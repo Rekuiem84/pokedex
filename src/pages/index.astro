@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import ShinyButton from "../components/ShinyButton.astro";
+import PokemonSprite from "../components/PokemonSprite.astro";
+import PokemonList from "../components/PokemonList.astro";
+import GenSelectList from "../components/GenSelectList.astro";
+---
+
+<Layout>
+	<Header />
+	<main class="pokedex">
+		<ShinyButton />
+		<PokemonSprite />
+		<PokemonList />
+		<GenSelectList />
+	</main>
+</Layout>
+
+<style>
+	.pokedex {
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+	@media (width < 992px) {
+		.pokedex {
+			flex-direction: column;
+			height: calc(100vh - 46px);
+		}
+	}
+	@media (width < 490px) {
+		.pokedex {
+			justify-content: space-between;
+		}
+	}
+</style>

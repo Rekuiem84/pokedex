@@ -1,0 +1,56 @@
+---
+import PokemonCard from "./PokemonCard.astro";
+
+const initialCount = 151;
+const initialOffset = 0;
+
+const apiURL = "https://pokeapi.co/api/v2/pokemon/";
+const response = await fetch(
+	`${apiURL}?limit=${initialCount}&offset=${initialOffset}`
+);
+
+const data = await response.json();
+---
+
+<ul class="pokemon-list" tabindex="-1">
+	{
+		data.results.map((pokemon: { name: string }, key: number) => (
+			<PokemonCard name={pokemon.name} key={key} />
+		))
+	}
+</ul>
+
+<style>
+	.pokemon-list {
+		min-width: 400px;
+		width: 100%;
+		max-width: 520px;
+		height: calc(100vh - 56px);
+		overflow-y: scroll;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		padding: 20px 10px 20px 0;
+		margin-right: 20px;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		&:focus-visible {
+			outline: 5px solid red;
+		}
+	}
+	@media (width < 992px) {
+		.pokemon-list {
+			height: calc(100vh - 451px);
+			margin-inline: auto;
+			padding-right: 0;
+		}
+	}
+	@media (width < 400px) {
+		.pokemon-list {
+			width: 100%;
+			min-width: initial;
+		}
+	}
+</style>

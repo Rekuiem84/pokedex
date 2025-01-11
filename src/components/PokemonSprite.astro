@@ -1,0 +1,35 @@
+---
+
+---
+
+<div class="pokemon-sprite-wrapper">
+	<div class="pokemon-sprite">
+		<img src="" data-id="" />
+	</div>
+</div>
+
+<style>
+	.pokemon-sprite-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-inline: auto;
+	}
+	.pokemon-sprite {
+		filter: drop-shadow(10px 10px 2px #39393951);
+	}
+	@media (width < 992px) {
+		.pokemon-sprite-wrapper {
+			max-width: 475px;
+			padding: 0 20px;
+		}
+	}
+	@media (width < 490px) {
+		.pokemon-sprite-wrapper {
+			max-width: 300px;
+		}
+		.pokemon-sprite {
+			margin-top: 70px;
+		}
+	}
+</style>

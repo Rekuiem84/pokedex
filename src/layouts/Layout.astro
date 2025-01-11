@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="generator" content={Astro.generator} />
+	<title>Pokédex</title>
+	<link rel="shortcut icon" type="image/png" href="/images/pokeball.png" />
+	<!-- -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Roboto+Slab:wght@500&display=swap"
+		rel="stylesheet"
+	/>
+
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--attachment: fixed;
+		--degrees: 115deg;
+		--colorStop-1: 50%;
+		--colorStop-2: calc(var(--colorStop-1) + 100px);
+	}
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	html::-webkit-scrollbar {
+		display: none;
+	}
+	img {
+		width: 100%;
+		vertical-align: middle;
+	}
+	body {
+		max-width: 1920px;
+		font-family: "Noto Sans KR", sans-serif;
+		background-color: #fff;
+		color: #282828;
+		background-image: linear-gradient(
+				var(--degrees),
+				transparent var(--colorStop-1),
+				#fe4d3e var(--colorStop-1) var(--colorStop-2),
+				#fa7246 var(--colorStop-2)
+			),
+			radial-gradient(
+				circle at 20% 70%,
+				rgb(239 208 234 / 0.9),
+				rgb(234 201 242 / 0.6),
+				rgb(231 238 197 / 0.6),
+				rgb(205 240 219 / 0.6),
+				rgb(231 237 245 / 0.6)
+			);
+		background-attachment: var(--attachment);
+		min-height: 100vh;
+		overflow: hidden;
+	}
+</style>

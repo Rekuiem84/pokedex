@@ -1,0 +1,61 @@
+---
+import GenSelectButton from "./GenSelectButton.astro";
+const generations = [
+	{ id: 1, listStart: "1", listEnd: "151", isChecked: true },
+	{ id: 2, listStart: "152", listEnd: "251", isChecked: false },
+	{ id: 3, listStart: "252", listEnd: "386", isChecked: false },
+	{ id: 4, listStart: "387", listEnd: "493", isChecked: false },
+	{ id: 5, listStart: "494", listEnd: "649", isChecked: false },
+	{ id: 6, listStart: "650", listEnd: "721", isChecked: false },
+	{ id: 7, listStart: "722", listEnd: "809", isChecked: false },
+	{ id: 8, listStart: "810", listEnd: "905", isChecked: false },
+	{ id: 9, listStart: "906", listEnd: "1025", isChecked: false },
+	{ id: "alt", listStart: "10001", listEnd: "10277", isChecked: false },
+];
+---
+
+<form class="gen-select">
+	{
+		generations.map((generation) => (
+			<GenSelectButton
+				id={generation.id}
+				listStart={generation.listStart}
+				listEnd={generation.listEnd}
+				isChecked={generation.isChecked}
+			/>
+		))
+	}
+</form>
+<style>
+	.gen-select {
+		position: absolute;
+		bottom: 20px;
+		left: 20px;
+		display: flex;
+		gap: 12px;
+	}
+	@media (width < 992px) {
+		.gen-select {
+			top: 20px;
+			right: 20px;
+			gap: 10px 25px;
+			bottom: initial;
+			left: initial;
+			flex-direction: column;
+		}
+	}
+	@media (width < 600px) {
+		.gen-select {
+			flex-wrap: wrap-reverse;
+			height: 255px;
+			opacity: 0.5;
+			transition: all 0.3s;
+
+			&:is(:hover, :focus-within) {
+				opacity: 1;
+			}
+		}
+	}
+</style>
+
+<script></script>
