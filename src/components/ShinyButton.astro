@@ -1,5 +1,10 @@
+---
+import { Image } from "astro:assets";
+import shinyStars from "/public/images/shiny-stars.png";
+---
+
 <button class="shiny-button">
-	<img src="images/shiny-stars.png" alt="toggle shiny" />
+	<Image src={shinyStars} alt="toggle shiny" width="80" height="80" />
 </button>
 
 <style>
