@@ -2,15 +2,15 @@
 import GenSelectButton from "./GenSelectButton.astro";
 const generations = [
 	{ id: 1, listStart: "1", listEnd: "151", isChecked: true },
-	{ id: 2, listStart: "152", listEnd: "251", isChecked: false },
-	{ id: 3, listStart: "252", listEnd: "386", isChecked: false },
-	{ id: 4, listStart: "387", listEnd: "493", isChecked: false },
-	{ id: 5, listStart: "494", listEnd: "649", isChecked: false },
-	{ id: 6, listStart: "650", listEnd: "721", isChecked: false },
-	{ id: 7, listStart: "722", listEnd: "809", isChecked: false },
-	{ id: 8, listStart: "810", listEnd: "905", isChecked: false },
-	{ id: 9, listStart: "906", listEnd: "1025", isChecked: false },
-	{ id: "alt", listStart: "10001", listEnd: "10277", isChecked: false },
+	{ id: 2, listStart: "152", listEnd: "251" },
+	{ id: 3, listStart: "252", listEnd: "386" },
+	{ id: 4, listStart: "387", listEnd: "493" },
+	{ id: 5, listStart: "494", listEnd: "649" },
+	{ id: 6, listStart: "650", listEnd: "721" },
+	{ id: 7, listStart: "722", listEnd: "809" },
+	{ id: 8, listStart: "810", listEnd: "905" },
+	{ id: 9, listStart: "906", listEnd: "1025" },
+	{ id: "alt", listStart: "10001", listEnd: "10277" },
 ];
 ---
 
@@ -21,11 +21,12 @@ const generations = [
 				id={generation.id}
 				listStart={generation.listStart}
 				listEnd={generation.listEnd}
-				isChecked={generation.isChecked}
+				isChecked={generation.isChecked || false}
 			/>
 		))
 	}
 </form>
+
 <style>
 	.gen-select {
 		position: absolute;
@@ -58,4 +59,7 @@ const generations = [
 	}
 </style>
 
-<script></script>
+<script>
+	const form = document.querySelector(".gen-select") as HTMLFormElement;
+	// form.addEventListener("submit", (event) => event.preventDefault());
+</script>

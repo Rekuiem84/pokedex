@@ -2,28 +2,16 @@
 const { id, listStart, listEnd, isChecked } = Astro.props;
 ---
 
-<!-- <input
+<input
 	type="radio"
 	class="gen-select__button"
-	name={`gen-${id}`}
+	name="gen"
 	id={`gen-${id}`}
 	value={id}
 	checked={isChecked}
-	onclick=`getPokeData(${listStart},${listEnd})`
-/> -->
-<button
-	type="submit"
-	class="gen-select__button"
-	class:list={[
-		"gen-select__button",
-		{ "gen-select__button--checked": isChecked },
-	]}
-	name={`gen-${id}`}
-	id={`gen-${id}`}
-	value={id}
-	onclick=`getPokeData(${listStart},${listEnd})`></button>
-
-<style>
+	onclick=`console.log("clicked")`
+/>
+<style is:global>
 	.gen-select__button {
 		position: relative;
 		--_width: 35px;
@@ -38,12 +26,12 @@ const { id, listStart, listEnd, isChecked } = Astro.props;
 			scale 0.2s ease-in-out;
 		transform-origin: center left;
 
-		&:is(:hover, :focus-visible, &.gen-select__button--checked) {
+		&:is(:hover, :focus-visible, :checked) {
 			scale: 1.5;
 			margin-right: 20px;
 			outline: none;
 		}
-		&.gen-select__button--checked::after {
+		&:checked::after {
 			border: 5px solid transparent;
 			border-top: 2px solid #000000aa;
 			border-bottom: 2px solid #000000aa;
@@ -81,7 +69,7 @@ const { id, listStart, listEnd, isChecked } = Astro.props;
 			&:is(:hover, :focus-visible) {
 				z-index: 20;
 			}
-			&:is(:hover, :focus-visible, &.gen-select__button--checked) {
+			&:is(:hover, :focus-visible, :checked) {
 				margin-bottom: 20px;
 				margin-right: 0;
 			}
