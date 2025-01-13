@@ -1,10 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import shinyStars from "/public/images/shiny-stars.png";
 ---
 
 <button class="shiny-button">
-	<Image src={shinyStars} alt="toggle shiny" width="80" height="80" />
+	<Image
+		src="/pokedex/images/shiny-stars.png"
+		alt="toggle shiny"
+		width="80"
+		height="80"
+	/>
 </button>
 
 <style>
@@ -13,6 +17,7 @@ import shinyStars from "/public/images/shiny-stars.png";
 		left: 20px;
 		top: 20px;
 		width: 5rem;
+		aspect-ratio: 1;
 		cursor: pointer;
 		z-index: 10;
 		background: none;
@@ -25,12 +30,14 @@ import shinyStars from "/public/images/shiny-stars.png";
 
 		& img {
 			filter: drop-shadow(5px 5px 0 rgba(130, 217, 211, 0.408));
+			height: 100%;
 		}
 	}
 
 	@media (width < 992px) {
 		.shiny-button {
 			width: 4rem;
+			height: 4rem;
 		}
 	}
 </style>
@@ -66,7 +73,7 @@ import shinyStars from "/public/images/shiny-stars.png";
 		toggleShinySprite();
 	}
 	function toggleShinyStars() {
-		shinyStars.src = `images/shiny-stars${getShinyStatus() ? "-active" : ""}.png`;
+		shinyStars.src = `/pokedex/images/shiny-stars${getShinyStatus() ? "-active" : ""}.png`;
 	}
 	function toggleShinySprite() {
 		const pokemonSpriteLink =

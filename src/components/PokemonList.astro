@@ -9,7 +9,7 @@ const response = await fetch(
 	`${apiURL}?limit=${initialCount}&offset=${initialOffset}`
 );
 
-const data = await response.json();
+let data = await response.json();
 ---
 
 <ul class="pokemon-list" tabindex="-1">
@@ -19,6 +19,33 @@ const data = await response.json();
 		))
 	}
 </ul>
+
+<script>
+	let data = {};
+	const apiURL = "https://pokeapi.co/api/v2/pokemon/";
+	// Fonction pour récupérer et mettre à jour la liste des Pokémon
+	async function updatePokemonList(listStart: string, listEnd: string) {
+		const count = parseInt(listEnd) - parseInt(listStart) + 1;
+		const offset = parseInt(listStart) - 1;
+		const response = await fetch(`${apiURL}?limit=${count}&offset=${offset}`);
+		data = await response.json();
+	}
+
+	const genForms = document.querySelectorAll(
+		".gen-form"
+	) as NodeListOf<HTMLFormElement>;
+
+	genForms.forEach((form) => {
+		form.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const formData = new FormData(form);
+			const genSelectValue = formData.get("gen-select") as string;
+			const [listStart, listEnd] = genSelectValue?.split(",") || [];
+
+			updatePokemonList(listStart, listEnd);
+		});
+	});
+</script>
 
 <style>
 	.pokemon-list {

@@ -2,16 +2,21 @@
 const { id, listStart, listEnd, isChecked } = Astro.props;
 ---
 
-<input
+<!-- <input
 	type="radio"
 	class="gen-select__button"
 	name="gen"
 	id={`gen-${id}`}
 	value={id}
 	checked={isChecked}
-	onclick=`console.log("clicked")`
-/>
-<style is:global>
+/> -->
+<button
+	type="submit"
+	class="gen-select__button"
+	name="gen"
+	id={`gen-${id}`}
+	value={id}></button>
+<style>
 	.gen-select__button {
 		position: relative;
 		--_width: 35px;

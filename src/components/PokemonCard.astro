@@ -1,6 +1,5 @@
 ---
 import Image from "astro/components/Image.astro";
-import pokeball from "/public/images/pokeball.png";
 
 const { name, key } = Astro.props;
 
@@ -27,7 +26,12 @@ const icon = data.sprites.front_default;
 	</div>
 	<p class="pokemon__name">{name}</p>
 	<div class="pokeball">
-		<Image src={pokeball} alt="pokeball" width="25" height="25" />
+		<Image
+			src="/pokedex/images/pokeball.png"
+			alt="pokeball"
+			width="25"
+			height="25"
+		/>
 	</div>
 </li>
 

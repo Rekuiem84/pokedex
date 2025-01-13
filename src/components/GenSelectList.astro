@@ -14,18 +14,25 @@ const generations = [
 ];
 ---
 
-<form class="gen-select">
+<div class="gen-select">
 	{
 		generations.map((generation) => (
-			<GenSelectButton
-				id={generation.id}
-				listStart={generation.listStart}
-				listEnd={generation.listEnd}
-				isChecked={generation.isChecked || false}
-			/>
+			<form class="gen-form">
+				<input
+					type="hidden"
+					name="gen-select"
+					value={`${generation.listStart},${generation.listEnd}`}
+				/>
+				<GenSelectButton
+					id={generation.id}
+					listStart={generation.listStart}
+					listEnd={generation.listEnd}
+					isChecked={generation.isChecked || false}
+				/>
+			</form>
 		))
 	}
-</form>
+</div>
 
 <style>
 	.gen-select {
@@ -60,6 +67,23 @@ const generations = [
 </style>
 
 <script>
-	const form = document.querySelector(".gen-select") as HTMLFormElement;
-	// form.addEventListener("submit", (event) => event.preventDefault());
+	const genForms = document.querySelectorAll(
+		".gen-form"
+	) as NodeListOf<HTMLFormElement>;
+
+	genForms.forEach((form) => {
+		form.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const formData = new FormData(form);
+			const genSelectValue = formData.get("gen-select") as string;
+			const [listStart, listEnd] = genSelectValue?.split(",") || [];
+			const numData = parseInt(listEnd) - parseInt(listStart) + 1;
+
+			// Émettre un événement personnalisé avec les données de génération
+			const event = new CustomEvent("generationSelected", {
+				detail: { listStart, listEnd },
+			});
+			window.dispatchEvent(event);
+		});
+	});
 </script>
