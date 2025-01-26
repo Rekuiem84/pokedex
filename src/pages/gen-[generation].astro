@@ -1,0 +1,21 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+// The [generation] in the file name is referenced by the value of generation in the getStaticPaths function
+export function getStaticPaths() {
+	return [
+		{ params: { generation: 1 } },
+		{ params: { generation: 2 } },
+		{ params: { generation: 3 } },
+		{ params: { generation: 4 } },
+		{ params: { generation: 5 } },
+		{ params: { generation: 6 } },
+		{ params: { generation: 7 } },
+		{ params: { generation: 8 } },
+		{ params: { generation: 9 } },
+		{ params: { generation: "alt" } },
+	];
+}
+---
+
+<MainLayout />

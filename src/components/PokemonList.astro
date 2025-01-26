@@ -1,13 +1,44 @@
 ---
 import PokemonCard from "./PokemonCard.astro";
 
-const initialCount = 151;
-const initialOffset = 0;
+const generationsList = [
+	{ id: 1, listStart: "1", listEnd: "151" },
+	{ id: 2, listStart: "152", listEnd: "251" },
+	{ id: 3, listStart: "252", listEnd: "386" },
+	{ id: 4, listStart: "387", listEnd: "493" },
+	{ id: 5, listStart: "494", listEnd: "649" },
+	{ id: 6, listStart: "650", listEnd: "721" },
+	{ id: 7, listStart: "722", listEnd: "809" },
+	{ id: 8, listStart: "810", listEnd: "905" },
+	{ id: 9, listStart: "906", listEnd: "1025" },
+	{ id: "alt", listStart: "10001", listEnd: "10277" },
+];
+
+const currentGen = Astro.params.generation as string;
+
+const defaultCount = 151;
+const defaultOffset = 0;
+
+const selectedGeneration = generationsList.find(
+	(gen) => gen.id.toString() === currentGen
+);
+
+const numberOfPokemonForSelectedGeneration = selectedGeneration
+	? parseInt(selectedGeneration.listEnd) -
+		parseInt(selectedGeneration.listStart) +
+		1
+	: defaultCount;
+
+const count = numberOfPokemonForSelectedGeneration || 151;
+const offset = selectedGeneration
+	? parseInt(selectedGeneration.listStart) - 1
+	: defaultOffset;
+
+console.log("Number of Pokémon for selected generation:", count);
+console.log("Offset for selected generation:", offset);
 
 const apiURL = "https://pokeapi.co/api/v2/pokemon/";
-const response = await fetch(
-	`${apiURL}?limit=${initialCount}&offset=${initialOffset}`
-);
+const response = await fetch(`${apiURL}?limit=${count}&offset=${offset}`);
 
 let data = await response.json();
 ---

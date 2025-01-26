@@ -1,21 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import ShinyButton from "../components/ShinyButton.astro";
-import PokemonSprite from "../components/PokemonSprite.astro";
-import PokemonList from "../components/PokemonList.astro";
-import GenSelectList from "../components/GenSelectList.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<Layout>
-	<Header />
-	<main class="pokedex">
-		<ShinyButton />
-		<PokemonSprite />
-		<PokemonList />
-		<GenSelectList />
-	</main>
-</Layout>
+<MainLayout />
 
 <style>
 	.pokedex {

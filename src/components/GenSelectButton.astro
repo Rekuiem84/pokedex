@@ -1,21 +1,21 @@
 ---
-const { id, listStart, listEnd, isChecked } = Astro.props;
+const { id } = Astro.props;
+const defaultGen = 1;
+
+const currentGen = Astro.params.generation || defaultGen;
 ---
 
-<!-- <input
-	type="radio"
-	class="gen-select__button"
-	name="gen"
-	id={`gen-${id}`}
-	value={id}
-	checked={isChecked}
-/> -->
+<input type="hidden" name="gen-select" value={id} />
+{
+	/* Add the active class to the current generation button, or to the first one if no specific generation is selected */
+}
 <button
 	type="submit"
-	class="gen-select__button"
+	class:list={["gen-select__button", { active: currentGen == id }]}
 	name="gen"
-	id={`gen-${id}`}
-	value={id}></button>
+	id={`gen-${id}`}>
+</button>
+
 <style>
 	.gen-select__button {
 		position: relative;
@@ -31,12 +31,12 @@ const { id, listStart, listEnd, isChecked } = Astro.props;
 			scale 0.2s ease-in-out;
 		transform-origin: center left;
 
-		&:is(:hover, :focus-visible, :checked) {
+		&:is(:hover, :focus-visible, .active) {
 			scale: 1.5;
 			margin-right: 20px;
 			outline: none;
 		}
-		&:checked::after {
+		&.active::after {
 			border: 5px solid transparent;
 			border-top: 2px solid #000000aa;
 			border-bottom: 2px solid #000000aa;
@@ -74,7 +74,7 @@ const { id, listStart, listEnd, isChecked } = Astro.props;
 			&:is(:hover, :focus-visible) {
 				z-index: 20;
 			}
-			&:is(:hover, :focus-visible, :checked) {
+			&:is(:hover, :focus-visible, .active) {
 				margin-bottom: 20px;
 				margin-right: 0;
 			}

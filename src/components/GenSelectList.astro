@@ -1,16 +1,16 @@
 ---
 import GenSelectButton from "./GenSelectButton.astro";
 const generations = [
-	{ id: 1, listStart: "1", listEnd: "151", isChecked: true },
-	{ id: 2, listStart: "152", listEnd: "251" },
-	{ id: 3, listStart: "252", listEnd: "386" },
-	{ id: 4, listStart: "387", listEnd: "493" },
-	{ id: 5, listStart: "494", listEnd: "649" },
-	{ id: 6, listStart: "650", listEnd: "721" },
-	{ id: 7, listStart: "722", listEnd: "809" },
-	{ id: 8, listStart: "810", listEnd: "905" },
-	{ id: 9, listStart: "906", listEnd: "1025" },
-	{ id: "alt", listStart: "10001", listEnd: "10277" },
+	{ id: 1 },
+	{ id: 2 },
+	{ id: 3 },
+	{ id: 4 },
+	{ id: 5 },
+	{ id: 6 },
+	{ id: 7 },
+	{ id: 8 },
+	{ id: 9 },
+	{ id: "alt" },
 ];
 ---
 
@@ -18,17 +18,7 @@ const generations = [
 	{
 		generations.map((generation) => (
 			<form class="gen-form">
-				<input
-					type="hidden"
-					name="gen-select"
-					value={`${generation.listStart},${generation.listEnd}`}
-				/>
-				<GenSelectButton
-					id={generation.id}
-					listStart={generation.listStart}
-					listEnd={generation.listEnd}
-					isChecked={generation.isChecked || false}
-				/>
+				<GenSelectButton id={generation.id} />
 			</form>
 		))
 	}
@@ -75,15 +65,9 @@ const generations = [
 		form.addEventListener("submit", (e) => {
 			e.preventDefault();
 			const formData = new FormData(form);
-			const genSelectValue = formData.get("gen-select") as string;
-			const [listStart, listEnd] = genSelectValue?.split(",") || [];
-			const numData = parseInt(listEnd) - parseInt(listStart) + 1;
+			const selectedGen = formData.get("gen-select") as string;
 
-			// Émettre un événement personnalisé avec les données de génération
-			const event = new CustomEvent("generationSelected", {
-				detail: { listStart, listEnd },
-			});
-			window.dispatchEvent(event);
+			document.location.href = `/pokedex/gen-${selectedGen}`;
 		});
 	});
 </script>
