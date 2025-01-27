@@ -51,13 +51,13 @@ const currentGen = Astro.params.generation || defaultGen;
 			aspect-ratio: 1;
 			border-radius: 100vw;
 			--gradient-3-versions: linear-gradient(
-				120deg,
+				115deg,
 				var(--color-version-1) 40%,
 				var(--color-version-2) 40% 60%,
 				var(--color-version-3) 60%
 			);
 			--gradient-2-versions: linear-gradient(
-				120deg,
+				115deg,
 				var(--color-version-1) 50%,
 				var(--color-version-2) 50%
 			);
@@ -141,7 +141,7 @@ const currentGen = Astro.params.generation || defaultGen;
 		}
 		/* Formes Alt */
 		&#gen-alt {
-			/* visibility: hidden; */
+			visibility: hidden;
 
 			&::before {
 				background-image: radial-gradient(

@@ -11,7 +11,8 @@ const generationsList = [
 	{ id: 7, listStart: "722", listEnd: "809" },
 	{ id: 8, listStart: "810", listEnd: "905" },
 	{ id: 9, listStart: "906", listEnd: "1025" },
-	{ id: "alt", listStart: "10001", listEnd: "10277" },
+	// Alternate forms : not their ID, but their placement in the API list
+	{ id: "alt", listStart: "1026", listEnd: "1302" },
 ];
 
 const currentGen = Astro.params.generation as string;
@@ -34,8 +35,8 @@ const offset = selectedGeneration
 	? parseInt(selectedGeneration.listStart) - 1
 	: defaultOffset;
 
-console.log("Number of Pokémon for selected generation:", count);
-console.log("Offset for selected generation:", offset);
+// console.log("Number of Pokémon for selected generation:", count);
+// console.log("Offset for selected generation:", offset);
 
 const apiURL = "https://pokeapi.co/api/v2/pokemon/";
 const response = await fetch(`${apiURL}?limit=${count}&offset=${offset}`);
@@ -50,33 +51,6 @@ let data = await response.json();
 		))
 	}
 </ul>
-
-<script>
-	let data = {};
-	const apiURL = "https://pokeapi.co/api/v2/pokemon/";
-	// Fonction pour récupérer et mettre à jour la liste des Pokémon
-	async function updatePokemonList(listStart: string, listEnd: string) {
-		const count = parseInt(listEnd) - parseInt(listStart) + 1;
-		const offset = parseInt(listStart) - 1;
-		const response = await fetch(`${apiURL}?limit=${count}&offset=${offset}`);
-		data = await response.json();
-	}
-
-	const genForms = document.querySelectorAll(
-		".gen-form"
-	) as NodeListOf<HTMLFormElement>;
-
-	genForms.forEach((form) => {
-		form.addEventListener("submit", (e) => {
-			e.preventDefault();
-			const formData = new FormData(form);
-			const genSelectValue = formData.get("gen-select") as string;
-			const [listStart, listEnd] = genSelectValue?.split(",") || [];
-
-			updatePokemonList(listStart, listEnd);
-		});
-	});
-</script>
 
 <style>
 	.pokemon-list {
